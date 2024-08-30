@@ -62,9 +62,21 @@ export class LoginComponent {
 
   async enviaLink() {
     const { value: email } = await Swal.fire({
+      // fire é responsável por lançar alerts com base nas configurações
       title: 'Informe o email cadastrado',
       input: 'email',
       inputPlaceholder: 'email',
     });
+    if (email) {
+      this.authService
+        .resetPassword(email)
+        .then(() => {
+          this.emailEnviado = true;
+          this.mensagem = `Email enviado para ${email} com instruções para recuperação`;
+        })
+        .catch((erro) => {
+          this.mensagem = `Email não encontrado. Detalhes ${erro.mensagem}`;
+        });
+    }
   }
 }
