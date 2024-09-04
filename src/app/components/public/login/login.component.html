@@ -6,7 +6,7 @@
           <div class="card-body">
             <h3 class="card-title text-center">
               <a routerLink="/inicio" href="#">
-                <i class="fas fa-tasks fa-2x"></i>
+                <i class="pi pi-list" style="font-size: 1.5rem"></i>
               </a>
               Sistema de Requisições
             </h3>
@@ -14,7 +14,7 @@
               <form #f="ngForm">
                 <fieldset>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
+                    <label>Email</label>
                     <input
                       class="form-control"
                       name="emailControle"
@@ -26,7 +26,10 @@
                       email
                       required
                     />
-                    <div *ngIf="emailControle.invalid" class="text-danger">
+                    <div
+                      *ngIf="emailControle.invalid && email != ''"
+                      class="text-danger"
+                    >
                       <div *ngIf="emailControle.errors?.['required']">
                         Email é obrigatório
                       </div>
@@ -36,7 +39,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Senha</label>
+                    <label>Senha</label>
                     <input
                       name="passwordControl"
                       #passwordControl="ngModel"
@@ -60,19 +63,18 @@
                   <div class="text-center">
                     <button
                       type="submit"
-                      class="btn btn-info btn-block"
+                      class="m-2 btn btn-info btn-block"
                       (click)="logar()"
                     >
-                      <i class="fas fa-sign-in-alt"></i> LOGAR
+                      <i class="pi pi-sign-out"></i> LOGAR
                     </button>
 
-                    <h6 class="text-center"><strong>OU</strong></h6>
                     <button
                       type="submit"
                       (click)="enviaLink()"
-                      class="btn btn-lg btn-success btn-block text-uppercase"
+                      class="m-2 btn btn-lg btn-success btn-block text-uppercase"
                     >
-                      <i class="far fa-envelope"></i> Recuperar
+                      <i class="pi pi-envelope"></i> Recuperar
                     </button>
                   </div>
                 </fieldset>

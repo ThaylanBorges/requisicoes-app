@@ -67,7 +67,9 @@ export class LoginComponent {
       input: 'email',
       inputPlaceholder: 'email',
     });
+
     if (email) {
+      this.email = email;
       this.authService
         .resetPassword(email)
         .then(() => {
