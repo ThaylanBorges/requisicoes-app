@@ -34,16 +34,8 @@ export class LoginComponent {
           let detalhes = '';
 
           switch (erro.code) {
-            case 'auth/user-not-fund': {
-              detalhes = 'Não existe usuário para o email informado';
-              break;
-            }
-            case 'auth/invalid-email': {
-              detalhes = 'Email inválido';
-              break;
-            }
-            case 'auth/wrong-password': {
-              detalhes = 'Senha inválida';
+            case 'invalid/login/credentials': {
+              detalhes = 'Senha ou email incorretos';
               break;
             }
 

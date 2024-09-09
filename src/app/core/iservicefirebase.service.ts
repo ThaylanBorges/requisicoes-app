@@ -1,6 +1,5 @@
 import { Model } from './model';
 import { map, Observable } from 'rxjs';
-
 import { plainToClass } from 'class-transformer';
 
 // firebase
@@ -8,6 +7,8 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+
+// interface
 import { Icrud } from './icrd.interface';
 
 export abstract class ServiceFirebase<T extends Model> implements Icrud<T> {
