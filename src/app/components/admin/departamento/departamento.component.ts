@@ -1,14 +1,15 @@
 import { Departamento } from './../../../models/departamento.model';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { DepartamentoService } from 'src/app/services/departamento.service';
 import Swal from 'sweetalert2';
+
+import { DepartamentoService } from 'src/app/services/departamento.service';
 
 @Component({
   selector: 'app-departamento',
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2';
 export class DepartamentoComponent {
   departamento$: Observable<Departamento[]> = new Observable(); // o $ indica uma operação assíncrona
   edit: boolean = false;
-  displayDialogDepartamento: boolean = false;
+  displayDialogDepartamento: boolean = true;
   form!: FormGroup;
 
   constructor(
@@ -67,7 +68,7 @@ export class DepartamentoComponent {
         Swal.fire(
           `Erro ao ${!this.edit ? 'salvar' : 'atualizar'} o departamento`,
           `Detalhes: ${erro}`,
-          erro
+          'error'
         );
       });
   }

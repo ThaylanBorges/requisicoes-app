@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
+import { authGuardGuard } from './guards/auth-guard.guard';
 import { RouterModule, Routes } from '@angular/router';
+
+// components
 import { LoginComponent } from './components/public/login/login.component';
-import { AuthguardService } from './services/authguard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin/painel', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'admin/painel',
@@ -12,15 +14,15 @@ const routes: Routes = [
       import('./components/admin/painel/painel.module').then(
         (m) => m.PainelModule
       ),
-    canActivate: [AuthguardService],
+    canActivate: [authGuardGuard],
   },
   {
-    path: 'admin/painel',
+    path: 'admin/departamento',
     loadChildren: () =>
       import('./components/admin/departamento/departamento.module').then(
         (m) => m.DepartamentoModule
       ),
-    canActivate: [AuthguardService],
+    canActivate: [authGuardGuard],
   },
 ];
 

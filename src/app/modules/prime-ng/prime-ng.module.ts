@@ -1,7 +1,8 @@
-import { tap } from 'rxjs';
+// modulos
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// modulos do PrimeNg
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
 import { MessagesModule } from 'primeng/messages';

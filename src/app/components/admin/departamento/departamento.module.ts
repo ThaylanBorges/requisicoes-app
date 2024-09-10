@@ -1,10 +1,13 @@
+// modulos
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { DepartamentoRoutingModule } from './departamento-routing.module';
-import { DepartamentoComponent } from './departamento.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'primeng/api';
+import { DepartamentoRoutingModule } from './departamento-routing.module';
+
+// components
+import { DepartamentoComponent } from './departamento.component';
+import { PrimeNGModule } from 'src/app/modules/prime-ng/prime-ng.module';
 
 @NgModule({
   declarations: [DepartamentoComponent],
@@ -12,6 +15,7 @@ import { SharedModule } from 'primeng/api';
     CommonModule,
     DepartamentoRoutingModule,
     ReactiveFormsModule,
+    PrimeNGModule,
     SharedModule,
   ],
 })
