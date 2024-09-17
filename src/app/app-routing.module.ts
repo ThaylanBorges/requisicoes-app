@@ -24,6 +24,14 @@ const routes: Routes = [
       ),
     canActivate: [authGuardGuard],
   },
+  {
+    path: 'admin/funcionario',
+    loadChildren: () =>
+      import('./components/admin/funcionario/funcionario.module').then(
+        (m) => m.FuncionarioModule
+      ),
+    canActivate: [authGuardGuard],
+  },
 ];
 
 @NgModule({

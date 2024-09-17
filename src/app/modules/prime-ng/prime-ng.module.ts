@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 // modulos do PrimeNg
 import { ButtonModule } from 'primeng/button';
-import { InputMaskModule } from 'primeng/inputmask';
 import { MessagesModule } from 'primeng/messages';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
@@ -22,7 +21,6 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
   imports: [
     CommonModule,
     ButtonModule,
-    InputMaskModule,
     MessagesModule,
     CheckboxModule,
     TableModule,
@@ -37,7 +35,6 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
   ],
   exports: [
     ButtonModule,
-    InputMaskModule,
     MessagesModule,
     CheckboxModule,
     TableModule,

@@ -19,7 +19,7 @@ import { DepartamentoService } from 'src/app/services/departamento.service';
 export class DepartamentoComponent {
   departamento$: Observable<Departamento[]> = new Observable(); // o $ indica uma operação assíncrona
   edit: boolean = false;
-  displayDialogDepartamento: boolean = true;
+  displayDialogDepartamento: boolean = false;
   form!: FormGroup;
 
   constructor(

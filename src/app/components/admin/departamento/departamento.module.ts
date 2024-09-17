@@ -8,6 +8,7 @@ import { DepartamentoRoutingModule } from './departamento-routing.module';
 // components
 import { DepartamentoComponent } from './departamento.component';
 import { PrimeNGModule } from 'src/app/modules/prime-ng/prime-ng.module';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [DepartamentoComponent],
@@ -17,6 +18,9 @@ import { PrimeNGModule } from 'src/app/modules/prime-ng/prime-ng.module';
     ReactiveFormsModule,
     PrimeNGModule,
     SharedModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
+  providers: [provideNgxMask()],
 })
 export class DepartamentoModule {}

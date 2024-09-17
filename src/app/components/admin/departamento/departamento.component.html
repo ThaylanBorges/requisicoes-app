@@ -1,5 +1,5 @@
 <div class="col col-lg-12 col-centered">
-  <div class="card col-lg-12 bg-light-col-centered">
+  <div class="card col-lg-12 bg-light col-centered">
     <div class="card-header">
       <h3>
         Departamentos
@@ -13,80 +13,95 @@
         </button>
       </h3>
     </div>
-  </div>
-  <div class="card-body col-lg-12 col-centered">
-    <table class="table table-striped table-hover table-bordered col-centered">
-      <thead class="thead-dark">
-        <th class="text-center">Nome</th>
-        <th class="text-center">Telefone</th>
-        <th class="text-center">Ações</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let departamento of departamento$ | async">
-          <td class="text-center">{{ departamento.nome }}</td>
-          <td class="text-center">{{ departamento.telefone }}</td>
-          <td class="text-center">
-            <button
-              type="button"
-              (click)="selecionaDepartamento(departamento)"
-              class="btn btn-success"
-            >
-              <i class="pi pi-file-edit"></i>
-            </button>
-            <button
-              type="button"
-              (click)="delete(departamento)"
-              class="btn btn-danger"
-            >
-              <i class="pi pi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
+    <div class="card-body col-lg-12 col-centered">
+      <table
+        class="table table-striped table-hover table-bordered col-centered"
+      >
+        <thead class="table-secondary">
+          <tr>
+            <th class="text-center fs-6">Nome</th>
+            <th class="text-center fs-6">Telefone</th>
+            <th class="text-center fs-6">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let departamento of departamento$ | async">
+            <td class="text-center text-break">{{ departamento.nome }}</td>
+            <td class="text-center text-break">
+              {{ departamento.telefone! | mask : "(00) 00000-0000" }}
+            </td>
+            <td class="text-center">
+              <button
+                type="button"
+                (click)="selecionaDepartamento(departamento)"
+                class="btn btn-success"
+              >
+                <i class="pi pi-file-edit"></i>
+              </button>
+              <button
+                type="button"
+                (click)="delete(departamento)"
+                class="btn btn-danger"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
 
-    <div class="text-center">
-      <a [routerLink]="['/admin/painel']" class="btn btn-primary">
-        <i class="pi pi-search" aria-hidden="true">Voltar</i>
-      </a>
+      <div class="text-center">
+        <a [routerLink]="['/admin/painel']" class="btn btn-primary">
+          <i class="pi pi-search" aria-hidden="true">Voltar</i>
+        </a>
+      </div>
     </div>
   </div>
 </div>
 
 <p-dialog
-  header="Dados do departamento"
-  [style]="{ width: '80vw' }"
+  [style]="{ width: '30vw' }"
   [contentStyle]="{ overflow: 'visable' }"
   [(visible)]="displayDialogDepartamento"
   [responsive]="true"
   [modal]="true"
 >
-  <div class="ui-grid ui-grid-responsive-ui-fluid" *ngIf="form.value">
+  <ng-template pTemplate="header">
+    <span class="pi pi-database fs-4 text-info"> Dados</span>
+  </ng-template>
+  <div class="p-grid p-grid-responsive p-fluid" *ngIf="form.value">
     <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-6">
-        <label for="nome">Nome: </label>
-        <input type="text" pInputText formControlName="nome" />
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          formControlName="nome"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Nome"
+        />
+        <label for="floatingInput">Nome</label>
       </div>
-
-      <div class="p-field p-col-12 p-md-6">
-        <label for="telefone">Telefone: </label>
-        <p-inputMask
+      <div class="form-floating mb-3">
+        <input
+          mask="(00) 00000-0000"
           formControlName="telefone"
-          mask="(99)99999-9999"
-        ></p-inputMask>
+          class="form-control"
+          id="floatingInput"
+          placeholder="Telefone"
+        />
+        <label for="floatingInput">Telefone</label>
       </div>
     </form>
-  </div>
-
-  <div class="p-d-flex p-jc-end">
-    <button
-      [disabled]="!form.valid"
-      type="button"
-      class="btn btn-primary"
-      (click)="save()"
-    >
-      <i class="pi pi-check-circle"></i> {{ edit ? "Atualizar" : "Salvar" }}
-    </button>
+    <div class="d-flex justify-content-end">
+      <button
+        [disabled]="!form.valid"
+        type="button"
+        class="btn btn-primary mx-0"
+        (click)="save()"
+      >
+        <i class="pi pi-check-circle"></i> {{ edit ? "Atualizar" : "Salvar" }}
+      </button>
+    </div>
   </div>
 </p-dialog>
