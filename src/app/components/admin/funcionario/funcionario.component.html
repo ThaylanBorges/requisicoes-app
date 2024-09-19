@@ -1,0 +1,145 @@
+<div class="col col-lg-12">
+  <div class="card col-lg-23 bg-light">
+    <div class="card-header">
+      <h3>
+        Funcionários
+        <button
+          type="button"
+          style="margin-right: 0px"
+          (click)="add()"
+          class="text-right btn btn-outline-info btn-lg"
+        >
+          <i class="pi pi-plus-circle" aria-hidden="true"></i>
+        </button>
+      </h3>
+      <ng-select [(ngModel)]="departamentoFiltro">
+        <ng-option [value]="'TODOS'">TODOS</ng-option>
+        <ng-option
+          *ngFor="let departamento of departamentos$ | async"
+          [value]="departamento.nome"
+          >{{ departamento.nome }}</ng-option
+        >
+      </ng-select>
+    </div>
+    <div class="card-body col-lg-12">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th class="text-center">Foto</th>
+            <th class="text-center">Nome</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Departamento</th>
+            <th class="text-center">Função</th>
+            <th class="text-center">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let funcionario of funcionarios$
+                | async
+                | filter : departamentoFiltro
+            "
+          >
+            <td class="text-center">
+              <img
+                [src]="funcionario.foto"
+                style="width: 100px"
+                class="img-fluid"
+              />
+            </td>
+            <td class="text-center">{{ funcionario.nome }}</td>
+            <td class="text-center">{{ funcionario.email }}</td>
+            <td class="text-center">{{ funcionario.departamento.nome }}</td>
+            <td class="text-center">{{ funcionario.funcao }}</td>
+            <td class="text-center">
+              <button
+                type="button"
+                (click)="selecionaFuncionario(funcionario)"
+                class="btn btn-success"
+              >
+                <i class="pi pi-file-edit"></i>
+              </button>
+              <button
+                type="button"
+                (click)="delet(funcionario)"
+                class="btn btn-danger"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+        <a [routerLink]="['/admin/painel']" class="btn btn-primary">
+          <i class="pi pi-search">Voltar</i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="Dados do Funcionário"
+  [style]="{ width: '80vw' }"
+  [contentStyle]="{ overflow: 'visable' }"
+  [visible]="displayDialogFuncionario"
+  [responsive]="true"
+  [modal]="true"
+>
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="form.value">
+    <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <label for="nome">Nome</label>
+        <input type="text" pInputText formControlName="nome" />
+      </div>
+
+      <div class="p-fild p-col-12 p-md-6">
+        <label for="email">Email</label>
+        <input type="email" pInputText formControlName="email" />
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <ng-select
+          [items]="departamentos$ | async"
+          bindLabel="nome"
+          formControlName="departamento"
+        ></ng-select>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <label for="funcao">Funcão</label>
+        <input type="text" pInputText formControlName="funcao" />
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <label for="foto">Foto</label>
+        <input
+          type="file"
+          #inputFile
+          class="form-control"
+          (change)="upload($event)"
+        />
+        <progress
+          style="width: 100%"
+          max="100"
+          [value]="uploadPercent | async"
+        ></progress>
+      </div>
+    </form>
+  </div>
+  <div
+    *ngIf="
+      form.controls['nome'].errors ||
+      form.controls['email'].errors ||
+      form.controls['departamento'].errors
+    "
+    class="text-warning"
+  >
+    Preenchimento obrigatório
+  </div>
+  <div class="p-d-flex p-jc-end">
+    <button [disabled]="!form.valid" class="btn btn-primary" (click)="save()">
+      <i class="pi pi-check-circle">{{ edit ? "Atualizar" : "Salvar" }}</i>
+    </button>
+  </div>
+</p-dialog>
