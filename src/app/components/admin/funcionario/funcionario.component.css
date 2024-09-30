@@ -1,0 +1,11 @@
+label {
+  font-weight: bold;
+}
+
+.btn {
+  margin: 5px;
+}
+
+::ng-deep .ng-select-container {
+  padding: 27px 0;
+}

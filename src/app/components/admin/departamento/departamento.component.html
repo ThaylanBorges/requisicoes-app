@@ -25,12 +25,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let departamento of departamento$ | async">
-            <td class="text-center text-break">{{ departamento.nome }}</td>
-            <td class="text-center text-break">
+          <tr *ngFor="let departamento of departamentos$ | async">
+            <td class="text-center text-break align-middle">
+              {{ departamento.nome }}
+            </td>
+            <td class="text-center text-break align-middle">
               {{ departamento.telefone! | mask : "(00) 00000-0000" }}
             </td>
-            <td class="text-center">
+            <td class="text-center align-middle">
               <button
                 type="button"
                 (click)="selecionaDepartamento(departamento)"

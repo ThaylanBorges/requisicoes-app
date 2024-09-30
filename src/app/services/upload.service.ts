@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+// angularFireStorage
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
@@ -8,16 +9,18 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class UploadService {
   constructor(private storage: AngularFireStorage) {}
 
-  async uploadFile(file: any) {
-    const filePath = `funcionarios/${new Date().getTime().toString()}`;
+  async uploadFile(event: any, path: string) {
+    const file = event.target.files[0];
+    const filePath = `${path}/${new Date().getTime().toString()}`;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
 
-    await task;
-    fileRef.getDownloadURL().subscribe((url) => {
-      url;
+    await this.storage.upload(filePath, file);
+
+    return new Promise((resolve, reject) => {
+      fileRef.getDownloadURL().subscribe({
+        next: (url) => resolve(url),
+        error: (error) => reject(error),
+      });
     });
-
-    return task;
   }
 }

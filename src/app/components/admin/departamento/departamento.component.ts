@@ -1,14 +1,18 @@
-import { Departamento } from './../../../models/departamento.model';
 import { Component } from '@angular/core';
+
+// rxjs
 import { Observable } from 'rxjs';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+
+// modelo
+import { Departamento } from './../../../models/departamento.model';
+
+// forms
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// sweetalert
 import Swal from 'sweetalert2';
 
+// services
 import { DepartamentoService } from 'src/app/services/departamento.service';
 
 @Component({
@@ -17,7 +21,7 @@ import { DepartamentoService } from 'src/app/services/departamento.service';
   styleUrls: ['./departamento.component.css'],
 })
 export class DepartamentoComponent {
-  departamento$: Observable<Departamento[]> = new Observable(); // o $ indica uma operação assíncrona
+  departamentos$: Observable<Departamento[]>; // o '$' indica uma operação assíncrona
   edit: boolean = false;
   displayDialogDepartamento: boolean = false;
   form!: FormGroup;
@@ -25,18 +29,19 @@ export class DepartamentoComponent {
   constructor(
     private departamentoService: DepartamentoService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.departamentos$ = this.departamentoService.list();
+  }
 
   ngOnInit() {
-    this.departamento$ = this.departamentoService.list();
     this.configForm();
   }
 
   configForm() {
     this.form = this.fb.group({
-      id: new FormControl(),
-      nome: new FormControl('', Validators.required),
-      telefone: new FormControl(''),
+      id: [null],
+      nome: ['', Validators.required],
+      telefone: [''],
     });
   }
 
@@ -84,11 +89,19 @@ export class DepartamentoComponent {
     })
       .then((result) => {
         if (result.value) {
-          this.departamentoService.delete(departamento.id);
+          return this.departamentoService.delete(departamento.id);
         }
+        throw new Error('Ação cancelada pelo usuário');
       })
       .then(() => {
         Swal.fire('Departamento excluído com sucesso!', '', 'success');
+      })
+      .catch((erro) => {
+        Swal.fire(
+          'Erro ao excluir o departamento',
+          `Detalhes: ${erro.message}`,
+          'error'
+        );
       });
   }
 }

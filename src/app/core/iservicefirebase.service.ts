@@ -65,6 +65,7 @@ export abstract class ServiceFirebase<T extends Model> implements Icrud<T> {
       return obj;
     } else {
       const res = await this.ref.add(obj);
+
       obj.id = res.id;
       await this.ref.doc(res.id).set(obj);
       return obj;

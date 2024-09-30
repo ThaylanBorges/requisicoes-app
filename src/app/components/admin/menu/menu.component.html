@@ -1,56 +1,72 @@
 <nav
   *ngIf="(user | async)?.uid"
-  class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient px-2"
+  class="navbar navbar-dark navbar-expand-lg bg-dark"
 >
-  <a
-    class="navbar-brand fw-bold"
-    routerLink="/admin/painel"
-    style="font-size: 1.4rem"
-  >
-    Requisições
-  </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarColor01"
-    aria-controls="navbarColor01"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" routerLink="admin/painel">
+      <img style="max-width: 35px" src="/assets/image.png" alt="Logo" />
+      Requisições
+    </a>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/admin/painel" href="#">
-          <i class="pi pi-home"></i> Painel</a
-        >
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/admin/funcionario" href="#">
-          <i class="pi pi-user"></i> Funcionários</a
-        >
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/admin/requisicao" href="#">
-          <i class="pi pi-folder"></i> Requisições</a
-        >
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/admin/departamento" href="#">
-          <i class="pi pi-building"></i> Departamentos</a
-        >
-      </li>
-    </ul>
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a href="#" (click)="sair()" class="nav-link">
-          <i class="pi pi-sign-out"></i>
-          SAIR</a
-        >
-      </li>
-    </ul>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasDarkNavbar"
+      aria-controls="offcanvasDarkNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end text-bg-dark"
+      tabindex="-1"
+      id="offcanvasDarkNavbar"
+      aria-labelledby="offcanvasDarkNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 gap-2">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link fw-bold" routerLink="/admin/painel">
+              <i class="pi pi-home"></i>
+              Painel
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link fw-bold" routerLink="/admin/funcionario">
+              <i class="pi pi-user"></i>
+              Funcionários
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link fw-bold" routerLink="/admin/requisicao">
+              <i class="pi pi-folder"></i>
+              Requisições
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link fw-bold" routerLink="/admin/departamento">
+              <i class="pi pi-building"></i>
+              Departamentos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="" (click)="sair()">
+              <i class="pi pi-sign-out"></i>
+              SAIR
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
