@@ -7,7 +7,12 @@ import { Observable } from 'rxjs';
 import { Departamento } from './../../../models/departamento.model';
 
 // forms
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 // sweetalert
 import Swal from 'sweetalert2';
@@ -39,9 +44,9 @@ export class DepartamentoComponent {
 
   configForm() {
     this.form = this.fb.group({
-      id: [null],
-      nome: ['', Validators.required],
-      telefone: [''],
+      id: new FormControl(null),
+      nome: new FormControl('', Validators.required),
+      telefone: new FormControl(''),
     });
   }
 

@@ -3,7 +3,7 @@
   class="navbar navbar-dark navbar-expand-lg bg-dark"
 >
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" routerLink="admin/painel">
+    <a class="navbar-brand" routerLink="admin/painel">
       <img style="max-width: 35px" src="/assets/image.png" alt="Logo" />
       Requisições
     </a>
@@ -16,7 +16,7 @@
       aria-controls="offcanvasDarkNavbar"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span class="pi pi-bars"></span>
     </button>
     <div
       class="offcanvas offcanvas-end text-bg-dark"
@@ -36,31 +36,31 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 gap-2">
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link fw-bold" routerLink="/admin/painel">
+            <a class="nav-link" routerLink="/admin/painel">
               <i class="pi pi-home"></i>
               Painel
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link fw-bold" routerLink="/admin/funcionario">
+            <a class="nav-link" routerLink="/admin/funcionario">
               <i class="pi pi-user"></i>
               Funcionários
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link fw-bold" routerLink="/admin/requisicao">
+            <a class="nav-link" routerLink="/admin/requisicao">
               <i class="pi pi-folder"></i>
               Requisições
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link fw-bold" routerLink="/admin/departamento">
+            <a class="nav-link" routerLink="/admin/departamento">
               <i class="pi pi-building"></i>
               Departamentos
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-bold" href="" (click)="sair()">
+            <a class="nav-link" href="" (click)="sair()">
               <i class="pi pi-sign-out"></i>
               SAIR
             </a>
