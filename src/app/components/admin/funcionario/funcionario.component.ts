@@ -34,7 +34,7 @@ export class FuncionarioComponent {
   departamentos$: Observable<Departamento[]> = new Observable();
   departamentoFiltro: string = '';
   edit: boolean = false;
-  displayDialogFuncionario: boolean = true;
+  displayDialogFuncionario: boolean = false;
   form!: FormGroup;
 
   // upload da foto

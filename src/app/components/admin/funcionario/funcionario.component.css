@@ -9,3 +9,7 @@ label {
 ::ng-deep .ng-select-container {
   padding: 27px 0;
 }
+
+p-dialog {
+  overflow: none; /* Esconde a barra de rolagem */
+}
