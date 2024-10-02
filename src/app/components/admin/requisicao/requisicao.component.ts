@@ -1,4 +1,3 @@
-import { authGuardGuard } from './../../../guards/auth-guard.guard';
 import { Component } from '@angular/core';
 
 // modulos genéricos
@@ -7,10 +6,18 @@ import { Funcionario } from 'src/app/models/funcionario.model';
 import { Requisicao } from 'src/app/models/requisicao.model';
 
 // forms
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 // rxjs
 import { map, Observable } from 'rxjs';
+
+// Swal
+import Swal from 'sweetalert2';
 
 // services
 import { RequisicaoService } from 'src/app/services/requisicao.service';
@@ -39,8 +46,14 @@ export class RequisicaoComponent {
     private fb: FormBuilder
   ) {}
 
+  ngOnInit() {
+    this.departamento$ = this.departamentoService.list();
+    this.configForm();
+    this.recuperarFuncionario();
+  }
+
   async recuperarFuncionario() {
-    await this.auth.authUser().subscribe((dados) => {
+    return this.auth.authUser().subscribe((dados) => {
       this.funcionarioService
         .getFuncionarioLogado(dados.email!)
         .subscribe((funcionario) => {
@@ -54,5 +67,87 @@ export class RequisicaoComponent {
           );
         });
     });
+  }
+
+  configForm() {
+    this.form = this.fb.group({
+      id: new FormControl(),
+      detino: new FormControl('', Validators.required),
+      solicitante: new FormControl(''),
+      dataAbertura: new FormControl(''),
+      ultimaAtualizacao: new FormControl(''),
+      status: new FormControl(''),
+      descricao: new FormControl('', Validators.required),
+    });
+  }
+
+  add() {
+    this.form.reset();
+    this.edit = false;
+    this.displayDialogRequisicao = true;
+    this.setValorPadrao();
+  }
+
+  setValorPadrao() {
+    this.form.patchValue({
+      solicitante: this.funcionarioLogado,
+      status: 'aberto',
+      dataAbertura: new Date(),
+      ultimaAtualizacao: new Date(),
+    });
+  }
+
+  selecionaRequisicao(func: Requisicao) {
+    this.edit = true;
+    this.displayDialogRequisicao = true;
+    this.form.setValue(func);
+  }
+
+  save() {
+    this.departamentoService
+      .createOrUpdate(this.form.value)
+      .then(() => {
+        this.displayDialogRequisicao = false;
+        Swal.fire(
+          `Requisição ${!this.edit ? 'salvo' : 'atualizado'} com sucesso`,
+          '',
+          'success'
+        );
+      })
+      .catch((erro) => {
+        this.displayDialogRequisicao = false;
+        Swal.fire(
+          `Erro ao ${!this.edit ? 'salvar' : 'atualizar'} a requisição`,
+          `Detalhes: ${erro}`,
+          'error'
+        );
+      });
+  }
+
+  delete(requisicao: Requisicao) {
+    Swal.fire({
+      title: 'Confirma a exclusão da requisição?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+    })
+      .then((result) => {
+        if (result.value) {
+          return this.requisicaoService.delete(requisicao.id);
+        }
+        throw new Error('Ação cancelada pelo usuário');
+      })
+      .then(() => {
+        Swal.fire('Requisição excluído com sucesso!', '', 'success');
+      })
+      .catch((erro) => {
+        Swal.fire(
+          'Erro ao excluir o requisição',
+          `Detalhes: ${erro.message}`,
+          'error'
+        );
+      });
   }
 }
