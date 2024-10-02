@@ -1,0 +1,104 @@
+<div class="col col-lg-12">
+  <div class="card col-lg-12">
+    <div class="card-header">
+      <h3>Requisições Solicitadas</h3>
+    </div>
+
+    <div class="card-body col-lg-12">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-secondary">
+          <tr>
+            <th class="text-center fs-6">Abertura</th>
+            <th class="text-center fs-6">Última atualização</th>
+            <th class="text-center fs-6">Departamento/th></th>
+            <th class="text-center fs-6">Status</th>
+            <th class="text-center fs-6">Movimentação</th>
+            <th class="text-center fs-6">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let requisicao of requisicoes$ | async">
+            <td class="text-center text-break align-middle">
+              {{ requisicao.dataAbertura.toDate() | date : "dd/MM/yyyy HH:mm" }}
+            </td>
+            <td class="text-center text-break align-middle">
+              {{
+                requisicao.ultimaAtualizacao.seconds * 1000
+                  | date : "dd/MM/yyyy HH:mm"
+              }}
+            </td>
+            <td class="text-center text-break align-middle">
+              {{ requisicao.destino }}
+            </td>
+            <td class="text-center text-break align-middle">
+              {{ requisicao.status }}
+            </td>
+            <td class="text-center text-break align-middle">
+              <span class="badge badge-pill badge-secondary">
+                {{
+                  !requisicao.movimentacoes.length
+                    ? "0"
+                    : requisicao.movimentacoes.length
+                }}
+              </span>
+            </td>
+            <td class="text-center text-break align-middle">
+              <button
+                type="button"
+                (click)="add(requisicao)"
+                class="btn btn-info"
+              >
+                <i class="pi pi-plus-circle"></i>
+              </button>
+              <button
+                type="button"
+                (click)="verMovimentacoes(requisicao)"
+                class="btn btn-success"
+              >
+                <i class="pi pi-list"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center mt-4">
+        <a [routerLink]="['/admin/painel']" class="btn btn-primary">
+          <i class="pi pi-search" aria-hidden="true"></i>
+          Voltar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Revisar essa parte-->
+<p-dialog
+  [style]="{ width: '80vw' }"
+  [contentStyle]="{ overflow: 'visable' }"
+  [(visible)]="displayDialogMovimentacao"
+  [responsive]="true"
+  [modal]="true"
+>
+  <div class="p-fluid p-formgrid p-grid" *ngIf="form.value">
+    <div class="col-12">
+      <label for="departamento">Solicitante</label>
+      <div class="text-primary">
+        {{ requisicaoSelecionada.solicitante.nome }}
+      </div>
+    </div>
+    <div class="form-floating">
+      <textarea
+        class="form-control"
+        placeholder="Solicitação"
+        id="floatingTextarea2"
+        style="height: 100px"
+        disabled
+        [value]="requisicaoSelecionada.descricao"
+      ></textarea>
+      <label for="floatingTextarea2">Solicitação</label>
+    </div>
+  </div>
+  <form [formGroup]="form" class="">
+    <div></div>
+  </form>
+</p-dialog>

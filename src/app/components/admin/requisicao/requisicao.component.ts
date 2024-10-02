@@ -24,6 +24,7 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { DepartamentoService } from 'src/app/services/departamento.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 @Component({
   selector: 'app-requisicao',
@@ -58,13 +59,15 @@ export class RequisicaoComponent {
         .getFuncionarioLogado(dados.email!)
         .subscribe((funcionario) => {
           this.funcionarioLogado = funcionario[0];
-          this.requisicao$ = this.requisicaoService.list().pipe(
-            map((reqs: Requisicao[]) =>
-              reqs.filter((r) => {
-                r.solicitante.email === this.funcionarioLogado.email;
-              })
-            )
-          );
+          this.requisicao$ = this.requisicaoService
+            .list()
+            .pipe(
+              map((requisicao: Requisicao[]) =>
+                requisicao.filter(
+                  (r) => r.solicitante.email === this.funcionarioLogado.email
+                )
+              )
+            );
         });
     });
   }
@@ -72,7 +75,7 @@ export class RequisicaoComponent {
   configForm() {
     this.form = this.fb.group({
       id: new FormControl(),
-      detino: new FormControl('', Validators.required),
+      destino: new FormControl('', Validators.required),
       solicitante: new FormControl(''),
       dataAbertura: new FormControl(''),
       ultimaAtualizacao: new FormControl(''),
@@ -84,8 +87,9 @@ export class RequisicaoComponent {
   add() {
     this.form.reset();
     this.edit = false;
-    this.displayDialogRequisicao = true;
     this.setValorPadrao();
+    this.displayDialogRequisicao = true;
+    console.log(this.form.value);
   }
 
   setValorPadrao() {
@@ -104,7 +108,7 @@ export class RequisicaoComponent {
   }
 
   save() {
-    this.departamentoService
+    this.requisicaoService
       .createOrUpdate(this.form.value)
       .then(() => {
         this.displayDialogRequisicao = false;

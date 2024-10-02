@@ -90,14 +90,14 @@
   [modal]="true"
 >
   <ng-template pTemplate="header">
-    <span class="pi pi-user fs-4 text-info"> Dados do funcionário</span>
+    <span class="pi pi-user fs-3 text-info"> Dados do funcionário</span>
   </ng-template>
   <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="form.value">
     <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
       <div class="form-floating mb-3">
         <input
           type="text"
-          pInputText
+          autofocus
           formControlName="nome"
           class="form-control"
           id="floatingInput"
@@ -109,7 +109,6 @@
       <div class="form-floating mb-3">
         <input
           type="email"
-          pInputText
           formControlName="email"
           class="form-control"
           id="floatingInput"
@@ -121,7 +120,6 @@
       <div class="form-floating mb-3">
         <input
           type="text"
-          pInputText
           class="form-control"
           id="floatingInput"
           formControlName="funcao"
@@ -133,7 +131,6 @@
         <ng-select
           [items]="departamentos$ | async"
           bindLabel="nome"
-          autofocus
           placeholder="Departamentos"
           formControlName="departamento"
           [searchable]="false"

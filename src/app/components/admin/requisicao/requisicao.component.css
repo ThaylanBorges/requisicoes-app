@@ -1,0 +1,12 @@
+button {
+  margin: 5px;
+}
+
+h3 {
+  margin: 0px;
+}
+
+::ng-deep .ng-select-container {
+  padding: 27px 0;
+  overflow: auto;
+}

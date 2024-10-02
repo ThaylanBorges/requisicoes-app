@@ -6,9 +6,10 @@ import { RequisicaoComponent } from './requisicao.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PrimeNGModule } from 'src/app/modules/prime-ng/prime-ng.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MovimentacaoComponent } from '../movimentacao/movimentacao.component';
 
 @NgModule({
-  declarations: [RequisicaoComponent],
+  declarations: [RequisicaoComponent, MovimentacaoComponent],
   imports: [
     CommonModule,
     RequisicaoRoutingModule,
