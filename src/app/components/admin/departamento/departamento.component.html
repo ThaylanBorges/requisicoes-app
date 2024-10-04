@@ -64,7 +64,7 @@
 
 <p-dialog
   [style]="{ width: '30vw' }"
-  [contentStyle]="{ overflow: 'visable' }"
+  [contentStyle]="{ overflow: 'visible' }"
   [(visible)]="displayDialogDepartamento"
   [responsive]="true"
   [modal]="true"
@@ -72,8 +72,8 @@
   <ng-template pTemplate="header">
     <span class="pi pi-building fs-3 text-info"> Dados</span>
   </ng-template>
-  <div class="p-grid p-grid-responsive p-fluid" *ngIf="form.value">
-    <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
+  <div class="row" *ngIf="form.value">
+    <form [formGroup]="form" class="col-12">
       <div class="form-floating mb-3">
         <input
           type="text"

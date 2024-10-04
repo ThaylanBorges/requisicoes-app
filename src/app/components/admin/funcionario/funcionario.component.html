@@ -84,7 +84,7 @@
 
 <p-dialog
   [style]="{ width: '40vw' }"
-  [contentStyle]="{ overflow: 'visable' }"
+  [contentStyle]="{ overflow: 'visible' }"
   [(visible)]="displayDialogFuncionario"
   [responsive]="true"
   [modal]="true"
@@ -92,8 +92,8 @@
   <ng-template pTemplate="header">
     <span class="pi pi-user fs-3 text-info"> Dados do funcionário</span>
   </ng-template>
-  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="form.value">
-    <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
+  <div class="row" *ngIf="form.value">
+    <form [formGroup]="form" class="col-12">
       <div class="form-floating mb-3">
         <input
           type="text"
@@ -125,8 +125,9 @@
           formControlName="funcao"
           placeholder="Função"
         />
-        <label for="funcao">Funcão</label>
+        <label for="funcao">Função</label>
       </div>
+
       <div class="mb-3">
         <ng-select
           [items]="departamentos$ | async"
@@ -143,7 +144,7 @@
         <input
           type="file"
           class="form-control"
-          id="inputGroupFile01 "
+          id="inputGroupFile01"
           (change)="upload($event)"
           accept=".jpg, .jpeg, .png"
         />
@@ -157,7 +158,7 @@
       class="btn btn-primary m-0"
       (click)="save()"
     >
-      <i class="pi pi-check-circle">{{ edit ? "Atualizar" : "Salvar" }}</i>
+      <i class="pi pi-check-circle"> {{ edit ? "Atualizar" : "Salvar" }}</i>
     </button>
   </div>
 </p-dialog>

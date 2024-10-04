@@ -24,7 +24,6 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { DepartamentoService } from 'src/app/services/departamento.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 @Component({
   selector: 'app-requisicao',
@@ -59,6 +58,8 @@ export class RequisicaoComponent {
         .getFuncionarioLogado(dados.email!)
         .subscribe((funcionario) => {
           this.funcionarioLogado = funcionario[0];
+          this.funcionarioLogado;
+
           this.requisicao$ = this.requisicaoService
             .list()
             .pipe(
@@ -81,6 +82,7 @@ export class RequisicaoComponent {
       ultimaAtualizacao: new FormControl(''),
       status: new FormControl(''),
       descricao: new FormControl('', Validators.required),
+      movimentacoes: new FormControl(''),
     });
   }
 
@@ -89,7 +91,6 @@ export class RequisicaoComponent {
     this.edit = false;
     this.setValorPadrao();
     this.displayDialogRequisicao = true;
-    console.log(this.form.value);
   }
 
   setValorPadrao() {
@@ -98,6 +99,7 @@ export class RequisicaoComponent {
       status: 'aberto',
       dataAbertura: new Date(),
       ultimaAtualizacao: new Date(),
+      movimentacoes: [],
     });
   }
 

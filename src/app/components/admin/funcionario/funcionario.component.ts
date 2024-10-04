@@ -79,8 +79,6 @@ export class FuncionarioComponent {
   }
 
   save() {
-    console.log(this.form.value);
-
     this.funcionarioService
       .createOrUpdate(this.form.value)
       .then(() => {
@@ -127,7 +125,6 @@ export class FuncionarioComponent {
         event,
         'funcionarios'
       );
-      console.log(fileUrl);
 
       this.form.patchValue({
         foto: fileUrl,

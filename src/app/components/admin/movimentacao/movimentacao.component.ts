@@ -72,7 +72,7 @@ export class MovimentacaoComponent {
 
   setValorPadra() {
     this.form.patchValue({
-      funcinario: this.funcionarioLogado,
+      funcionario: this.funcionarioLogado,
       dataHora: new Date(),
     });
     this.movimentacoes = [];
@@ -87,6 +87,10 @@ export class MovimentacaoComponent {
       ? []
       : requisicao.movimentacoes;
     this.displayDialogMovimentacao = true;
+  }
+
+  teste() {
+    console.log(this.form.value);
   }
 
   verMovimentacoes(requisicao: Requisicao) {

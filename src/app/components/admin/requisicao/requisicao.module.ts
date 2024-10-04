@@ -7,9 +7,16 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PrimeNGModule } from 'src/app/modules/prime-ng/prime-ng.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovimentacaoComponent } from '../movimentacao/movimentacao.component';
+import { CountMovimentacoesPipe } from 'src/app/pipes/count-movimentacoes.pipe';
+import { ShowSolicitantePipe } from 'src/app/pipes/show-solicitante.pipe';
 
 @NgModule({
-  declarations: [RequisicaoComponent, MovimentacaoComponent],
+  declarations: [
+    RequisicaoComponent,
+    MovimentacaoComponent,
+    CountMovimentacoesPipe,
+    ShowSolicitantePipe,
+  ],
   imports: [
     CommonModule,
     RequisicaoRoutingModule,
