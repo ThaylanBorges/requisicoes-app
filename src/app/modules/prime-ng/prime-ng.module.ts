@@ -15,6 +15,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from 'primeng/calendar';
 import { TabViewModule } from 'primeng/tabview';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [],
@@ -32,6 +33,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     CalendarModule,
     TabViewModule,
     ToggleButtonModule,
+    ToolbarModule,
   ],
   exports: [
     ButtonModule,
@@ -46,6 +48,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     CalendarModule,
     TabViewModule,
     ToggleButtonModule,
+    ToolbarModule,
   ],
 })
 export class PrimeNGModule {}

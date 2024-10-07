@@ -1,0 +1,88 @@
+<p-dialog
+  [style]="{ width: '80vw' }"
+  [contentStyle]="{ overflow: 'visible' }"
+  [(visible)]="displayDialogMovimentacoes"
+  (onHide)="onClose()"
+  [responsive]="true"
+  [modal]="true"
+>
+  <div>
+    <table class="table table-strip tabele-hover table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th class="text-center">Data</th>
+          <th class="text-center">Funcionário</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movimento of movimentacoes; index as i">
+          <td class="text-center">
+            {{ movimento.dataHora.seconds * 1000 | date : "dd/MM/yyyy HH:mm" }}
+          </td>
+          <td class="text-center">{{ movimento.funcionario.nome }}</td>
+          <td class="text-center">{{ movimento.status }}</td>
+          <td class="text-center">
+            <div
+              *ngIf="funcionarioLogado.email === movimento.funcionario.email"
+            >
+              <button class="btn btn-success">
+                <i class="pi pi-file-edit"></i>
+              </button>
+              <button class="btn danger">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p-dialog>
+
+<p-dialog
+  [style]="{ width: '80vw' }"
+  [contentStyle]="{ overflow: 'visible' }"
+  [(visible)]="displayDialogMovimentacao"
+  [responsive]="true"
+  [modal]="true"
+>
+  <div *ngIf="form.value">
+    <form [formGroup]="form">
+      <div class="mb-3">
+        <label for="departamento">Status</label>
+      </div>
+      <div>
+        <ng-select [items]="listaStatus" formControlName="status"></ng-select>
+      </div>
+      <div class="mb-3">
+        <div>
+          <label for="descricao">Descrição</label>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            formControlName="descricao"
+            placeholder="Descrição"
+            id="floatingTextarea2"
+            style="height: 100px"
+          ></textarea>
+          <label for="floatingTextarea2">Descrição</label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <p-toolbar>
+    <div class="d-flex justify-content-end">
+      <button
+        [disabled]="!form.valid"
+        class="btn btn-primary"
+        (click)="update()"
+      >
+        <i class="pi pi-check-circle">{{ edit ? "Atualizar" : "Salvar" }}</i>
+      </button>
+    </div>
+  </p-toolbar>
+</p-dialog>
