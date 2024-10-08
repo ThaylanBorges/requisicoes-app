@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 // rxjs
 import { Observable } from 'rxjs';
 
-// modelo
+// modelos
 import { Departamento } from './../../../models/departamento.model';
 
 // forms
@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-// sweetalert
+// swal
 import Swal from 'sweetalert2';
 
 // services
@@ -56,7 +56,7 @@ export class DepartamentoComponent {
     this.displayDialogDepartamento = true;
   }
 
-  selecionaDepartamento(departamento: Departamento) {
+  editarDepartamento(departamento: Departamento) {
     this.edit = true;
     this.displayDialogDepartamento = true;
     this.form.setValue(departamento);
@@ -68,7 +68,7 @@ export class DepartamentoComponent {
       .then(() => {
         this.displayDialogDepartamento = false;
         Swal.fire(
-          `Departamento ${!this.edit ? 'salvo' : 'atualizado'} com sucesso`,
+          `Departamento ${!this.edit ? 'salvo' : 'atualizado'} com sucesso!`,
           '',
           'success'
         );
@@ -76,7 +76,7 @@ export class DepartamentoComponent {
       .catch((erro) => {
         this.displayDialogDepartamento = false;
         Swal.fire(
-          `Erro ao ${!this.edit ? 'salvar' : 'atualizar'} o departamento`,
+          `Erro ao ${!this.edit ? 'salvar' : 'atualizar'} o departamento!`,
           `Detalhes: ${erro}`,
           'error'
         );

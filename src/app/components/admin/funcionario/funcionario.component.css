@@ -9,3 +9,22 @@ h3 {
   padding: 27px 0;
   overflow: auto;
 }
+
+.teste {
+  overflow: auto;
+}
+
+/* Ocultar a barra de rolagem no Chrome, Safari e navegadores baseados em WebKit */
+.teste::-webkit-scrollbar {
+  display: none;
+}
+
+/* Para Firefox */
+.teste {
+  scrollbar-width: none; /* Oculta a barra de rolagem no Firefox */
+}
+
+/* Para Internet Explorer e Edge */
+.teste {
+  -ms-overflow-style: none; /* Oculta a barra de rolagem no IE/Edge */
+}

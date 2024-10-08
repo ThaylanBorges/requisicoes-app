@@ -57,7 +57,7 @@
             <td class="text-center align-middle">
               <button
                 type="button"
-                (click)="selecionaFuncionario(funcionario)"
+                (click)="editarFuncionario(funcionario)"
                 class="btn btn-success table-button"
               >
                 <i class="pi pi-file-edit"></i>
@@ -142,6 +142,7 @@
       <div class="input-group mb-3">
         <label class="input-group-text" for="inputGroupFile01">Upload</label>
         <input
+          #inputFile
           type="file"
           class="form-control"
           id="inputGroupFile01"

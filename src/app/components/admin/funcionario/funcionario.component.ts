@@ -1,4 +1,3 @@
-// angular core
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 // rxjs
@@ -38,7 +37,8 @@ export class FuncionarioComponent {
   form!: FormGroup;
 
   // upload da foto
-  @ViewChild('inputFile', { static: false }) inputFile!: ElementRef;
+  @ViewChild('inputFile', { static: false })
+  inputFile!: ElementRef;
   selectedFile!: File;
 
   constructor(
@@ -46,11 +46,12 @@ export class FuncionarioComponent {
     private departamentoService: DepartamentoService,
     private uploadService: UploadService,
     private fb: FormBuilder
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.funcionarios$ = this.funcionarioService.list();
     this.departamentos$ = this.departamentoService.list();
+  }
+
+  ngOnInit() {
     this.departamentoFiltro = 'TODOS';
     this.configForm();
   }
@@ -68,11 +69,12 @@ export class FuncionarioComponent {
 
   add() {
     this.form.reset();
+    this.inputFile.nativeElement.value = '';
     this.edit = false;
     this.displayDialogFuncionario = true;
   }
 
-  selecionaFuncionario(funcionario: Funcionario) {
+  editarFuncionario(funcionario: Funcionario) {
     this.edit = true;
     this.displayDialogFuncionario = true;
     this.form.setValue(funcionario);
@@ -97,7 +99,6 @@ export class FuncionarioComponent {
           'error'
         );
       });
-    this.form.reset();
   }
 
   delet(funcionario: Funcionario) {
@@ -112,6 +113,7 @@ export class FuncionarioComponent {
       if (result.value) {
         this.funcionarioService.delete(funcionario.id).then(() => {
           Swal.fire('Funcinário excluído com sucesso!', '', 'success');
+          throw new Error('Ação');
         });
       }
     });

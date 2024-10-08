@@ -1,8 +1,14 @@
 // modulos
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+// angular forms
 import { ReactiveFormsModule } from '@angular/forms';
+
+// primeNg
 import { SharedModule } from 'primeng/api';
+
+// routing
 import { DepartamentoRoutingModule } from './departamento-routing.module';
 
 // components

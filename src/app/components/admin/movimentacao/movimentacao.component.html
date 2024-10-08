@@ -87,12 +87,11 @@
       </span>
     </div>
     <div class="mb-3">
-      <!--Criar um pipe para tirar esse alerta-->
       <textarea
         class="form-control"
         id="floatingTextarea2"
         style="height: 100px"
-        [value]="requisicaoSelecionada?.descricao"
+        [value]="requisicaoSelecionada | showDescricao"
         disabled
       ></textarea>
     </div>

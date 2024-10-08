@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovimentacaoComponent } from '../movimentacao/movimentacao.component';
 import { CountMovimentacoesPipe } from 'src/app/pipes/count-movimentacoes.pipe';
 import { ShowSolicitantePipe } from 'src/app/pipes/show-solicitante.pipe';
+import { ShowDescricaoPipe } from 'src/app/pipes/show-descricao.pipe';
 import { ListaComponent } from '../movimentacao/lista/lista.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ListaComponent } from '../movimentacao/lista/lista.component';
     ListaComponent,
     CountMovimentacoesPipe,
     ShowSolicitantePipe,
+    ShowDescricaoPipe,
   ],
   imports: [
     CommonModule,
